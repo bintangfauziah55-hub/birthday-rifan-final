@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise for Rifan 🤍</title>
+
+<style>
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+}
+
+body{
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Georgia,serif;
+  color:white;
+  background:
+    radial-gradient(circle at 50% 5%,#eaf8ff 0%,#b8dcf5 20%,#668eb5 48%,#182b40 100%);
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(#fff 1px,transparent 1px),
+    radial-gradient(#e8f7ff 1px,transparent 1px);
+  background-size:75px 75px,125px 125px;
+  background-position:10px 15px,50px 70px;
+  opacity:.55;
+}
+
+.card{
+  position:relative;
+  z-index:2;
+  width:92%;
+  max-width:650px;
+  min-height:610px;
+  padding:42px 28px 58px;
+  border-radius:30px;
+  text-align:center;
+  background:rgba(10,28,47,.62);
+  border:1px solid rgba(255,255,255,.3);
+  box-shadow:0 25px 80px rgba(5,20,40,.55);
+  backdrop-filter:blur(14px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.page{
+  display:none;
+  width:100%;
+  animation:fade .7s ease;
+}
+
+.page.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:none}
+}
+
+.small{
+  font:12px Arial,sans-serif;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#dff3ff;
+}
+
+h1{
+  font-size:clamp(43px,12vw,78px);
+  line-height:.95;
+  margin:20px 0;
+}
+
+h2{
+  font-size:clamp(28px,8vw,44px);
+  line-height:1.15;
+  margin:18px 0;
+}
+
+.blue{
+  color:#d4efff;
+}
+
+p{
+  font:15px/1.8 Arial,sans-serif;
+  color:#edf8ff;
+}
+
+.heart{
+  font-size:65px;
+  animation:pulse 1.7s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.12)}
+}
+
+.cake{
+  font-size:76px;
+  margin:10px;
+}
+
+.letter{
+  text-align:left;
+  margin-top:18px;
+  padding:22px;
+  max-height:350px;
+  overflow:auto;
+  border-radius:21px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+}
+
+.signature{
+  text-align:right;
+  color:#cfeaff;
+  font-style:italic;
+  margin-top:15px;
+}
+
+button{
+  border:0;
+  border-radius:999px;
+  padding:13px 24px;
+  margin-top:21px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f5fcff,#b9ddf7);
+  color:#18334d;
+  font-weight:bold;
+  box-shadow:0 8px 28px rgba(120,190,235,.25);
+}
+
+button:active{
+  transform:scale(.97);
+}
+
+textarea{
+  width:100%;
+  height:110px;
+  margin-top:18px;
+  padding:14px;
+  border-radius:17px;
+  border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.1);
+  color:white;
+  outline:none;
+  resize:none;
+  font:14px Arial,sans-serif;
+}
+
+textarea::placeholder{
+  color:#d6e8f4;
+}
+
+#sent{
+  display:none;
+  color:#e8f7ff;
+}
+
+#continue{
+  display:none;
+}
+
+.dots{
+  position:absolute;
+  bottom:20px;
+  display:flex;
+  gap:7px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#7591aa;
+}
+
+.dot.on{
+  background:white;
+  box-shadow:0 0 10px white;
+}
+
+.music{
+  position:fixed;
+  top:14px;
+  right:14px;
+  z-index:10;
+  margin:0;
+  padding:9px 14px;
+  background:rgba(10,28,47,.8);
+  color:white;
+  border:1px solid rgba(255,255,255,.25);
+}
+
+#confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:20;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<button class="music" id="music">♫ Musik: OFF</button>
+
+<main class="card">
+
+<!-- HALAMAN 1 -->
+<section class="page active">
+
+  <div class="heart">♡</div>
+
+  <div class="small">
+    a little surprise for you
+  </div>
+
+  <h1>
+    A Little Birthday<br>
+    <span class="blue">Surprise for Rifan 🤍</span>
+  </h1>
+
+  <p>
+    Ada sesuatu kecil yang ingin kusampaikan<br>
+    untukmu di hari spesial ini...
+  </p>
+
+  <button onclick="nextPage()">
+    Buka perlahan ✨
+  </button>
+
+</section>
+
+
+<!-- HALAMAN 2 -->
+<section class="page">
+
+  <div class="cake">🎂</div>
+
+  <div class="small">
+    today is your day
+  </div>
+
+  <h2>
+    Selamat ulang tahun,<br>
+    <span class="blue">Rifan 🤍</span>
+  </h2>
+
+  <p>
+    Semoga semua doa baik yang kamu simpan
+    perlahan menemukan jalannya.
+    <br><br>
+    Semoga hari-harimu dipenuhi banyak hal
+    yang membuatmu bahagia dan merasa cukup.
+  </p>
+
+  <button onclick="nextPage()">
+    Ada surat untukmu 💌
+  </button>
+
+</section>
+
+
+<!-- HALAMAN 3 -->
+<section class="page">
+
+  <div class="small">
+    a little letter
+  </div>
+
+  <div class="letter">
+
+    <p>
+
+      Selamat ulang tahun, Rifan. 🤍
+
+      <br><br>
+
+      Di hari spesialmu ini, aku ingin mengucapkan
+      terima kasih karena sudah menjadi seseorang
+      yang bisa aku kenal dan hadir dalam cerita hidupku.
+
+      <br><br>
+
+      Mungkin tidak semua hari terasa mudah,
+      dan mungkin ada banyak hal yang belum berjalan
+      seperti yang kamu harapkan.
+
+      Tapi aku berharap kamu selalu punya alasan
+      untuk terus melangkah dan percaya bahwa
+      masih banyak hal indah yang menunggumu.
+
+      <br><br>
+
+      Semoga kamu selalu diberi kesehatan,
+      ketenangan, kekuatan, dan orang-orang baik
+      yang tulus menyayangimu.
+
+      <br><br>
+
+      Semoga semua impian yang sedang kamu perjuangkan
+      perlahan menemukan jalannya.
+      Dan semoga doa-doa yang selama ini kamu simpan
+      diam-diam, satu per satu bisa menjadi nyata.
+
+      <br><br>
+
+      Aku bersyukur pernah mengenalmu.
+      Semoga bertambahnya usia membawa lebih banyak
+      kebahagiaan, pengalaman baik, dan alasan
+      untuk tersenyum.
+
+      <br><br>
+
+      Jaga dirimu baik-baik, Rifan.
+      Semoga langkahmu selalu dipertemukan
+      dengan hal-hal baik.
+
+    </p>
+
+    <div class="signature">
+      — dengan doa baik untukmu 🤍
+    </div>
+
+  </div>
+
+  <button onclick="nextPage()">
+    Satu hal lagi ✨
+  </button>
+
+</section>
+
+
+<!-- HALAMAN 4 -->
+<section class="page">
+
+  <div class="heart">✦</div>
+
+  <div class="small">
+    make a wish
+  </div>
+
+  <h2>
+    Satu harapan untuk Rifan ✨
+  </h2>
+
+  <p>
+    Kalau boleh punya satu harapan
+    di hari ulang tahun ini,
+    kamu mau berharap apa?
+  </p>
+
+  <textarea
+    id="wish"
+    placeholder="Tulis harapanmu di sini..."
+  ></textarea>
+
+  <button onclick="saveWish()">
+    Simpan harapanku 💫
+  </button>
+
+  <p id="sent">
+    Aku harap, satu per satu harapanmu
+    bisa menjadi kenyataan. 🤍
+  </p>
+
+  <button id="continue" onclick="nextPage()">
+    Lanjut 🌙
+  </button>
+
+</section>
+
+
+<!-- HALAMAN 5 -->
+<section class="page">
+
+  <div class="heart">♡</div>
+
+  <div class="small">
+    one last thing
+  </div>
+
+  <h2>
+    Happy Birthday,<br>
+    <span class="blue">Rifan 🤍</span>
+  </h2>
+
+  <p>
+
+    Sekali lagi, selamat ulang tahun, Rifan. 🤍
+
+    <br><br>
+
+    Semoga di setiap langkah yang kamu ambil,
+    selalu ada hal baik yang menunggumu.
+
+    Semoga kamu selalu diberi alasan untuk tersenyum,
+    dikelilingi orang-orang yang tulus,
+    dan diberi kekuatan untuk melewati apa pun
+    yang datang.
+
+    <br><br>
+
+    Terima kasih sudah hadir dan menjadi seseorang
+    yang menyenangkan untuk dikenal.
+
+    Aku berharap, hari-hari ke depan membawa
+    lebih banyak kebahagiaan untukmu daripada kesedihan.
+
+    <br><br>
+
+    Semoga semua doa yang pernah kamu ucapkan,
+    bahkan yang hanya kamu simpan sendiri,
+    perlahan menemukan jalannya untuk menjadi nyata.
+
+    <br><br>
+
+    <b>
+      Jaga diri baik-baik, Rifan.
+      Semoga kamu selalu bahagia. 🤍🌙
+    </b>
+
+  </p>
+
+  <button onclick="bigConfetti()">
+    ✨ Surprise
+  </button>
+
+</section>
+
+
+<div class="dots">
+  <span class="dot on"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+</main>
+
+
+<script>
+
+const pages = [...document.querySelectorAll(".page")];
+const dots = [...document.querySelectorAll(".dot")];
+
+let current = 0;
+
+function showPage(number){
+
+  pages[current].classList.remove("active");
+  dots[current].classList.remove("on");
+
+  current = number;
+
+  pages[current].classList.add("active");
+  dots[current].classList.add("on");
+
+  confetti(45);
+}
+
+function nextPage(){
+
+  if(current < pages.length - 1){
+    showPage(current + 1);
+  }
+
+}
+
+function saveWish(){
+
+  const wish = document.getElementById("wish");
+
+  if(!wish.value.trim()){
+    wish.focus();
+    return;
+  }
+
+  document.getElementById("sent").style.display = "block";
+  document.getElementById("continue").style.display = "inline-block";
+
+  confetti(100);
+}
+
+
+/* CONFETTI */
+
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+let pieces = [];
+
+function resize(){
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+}
+
+resize();
+
+window.addEventListener("resize",resize);
+
+function confetti(amount){
+
+  for(let i=0;i<amount;i++){
+
+    pieces.push({
+      x:window.innerWidth/2+(Math.random()-.5)*180,
+      y:window.innerHeight*.4,
+      vx:(Math.random()-.5)*9,
+      vy:-Math.random()*9-3,
+      size:Math.random()*7+3,
+      rot:Math.random()*6.28,
+      life:150
+    });
+
+  }
+
+}
+
+function bigConfetti(){
+  confetti(300);
+}
+
+function animate(){
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  pieces = pieces.filter(p => p.life-- > 0);
+
+  pieces.forEach(p => {
+
+    p.x += p.vx;
+    p.vy += .17;
+    p.y += p.vy;
+    p.rot += .12;
+
+    ctx.save();
+
+    ctx.translate(p.x,p.y);
+    ctx.rotate(p.rot);
+
+    ctx.globalAlpha =
+      Math.min(1,p.life/30);
+
+    const colors=[
+      "#ffffff",
+      "#dff2ff",
+      "#b9ddf7",
+      "#cceaff"
+    ];
+
+    ctx.fillStyle =
+      colors[Math.floor(Math.random()*colors.length)];
+
+    ctx.fillRect(
+      -p.size/2,
+      -p.size/2,
+      p.size,
+      p.size*1.7
+    );
+
+    ctx.restore();
+
+  });
+
+  requestAnimationFrame(animate);
+
+}
+
+animate();
+
+
+/* MUSIK */
+
+let audio = null;
+let playing = false;
+let timer = null;
+
+const melody = [
+  261.63,
+  329.63,
+  392,
+  329.63,
+  293.66,
+  349.23,
+  440,
+  349.23
+];
+
+function playMelody(){
+
+  if(!playing) return;
+
+  const now = audio.currentTime;
+
+  melody.forEach((frequency,index)=>{
+
+    const oscillator =
+      audio.createOscillator();
+
+    const gain =
+      audio.createGain();
+
+    const start =
+      now + index * .48;
+
+    oscillator.type = "sine";
+    oscillator.frequency.value =
+      frequency;
+
+    gain.gain.setValueAtTime(
+      0,
+      start
+    );
+
+    gain.gain.linearRampToValueAtTime(
+      .05,
+      start+.04
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      start+.38
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audio.destination);
+
+    oscillator.start(start);
+    oscillator.stop(start+.42);
+
+  });
+
+  timer =
+    setTimeout(playMelody,3840);
+
+}
+
+document.getElementById("music").onclick=function(){
+
+  if(!audio){
+
+    audio =
+      new(
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+
+  }
+
+  if(audio.state === "suspended"){
+    audio.resume();
+  }
+
+  playing = !playing;
+
+  if(playing){
+
+    playMelody();
+
+    this.textContent =
+      "♫ Musik: ON";
+
+  }else{
+
+    clearTimeout(timer);
+
+    this.textContent =
+      "♫ Musik: OFF";
+
+  }
+
+};
+
+</script>
+
+</body>
+    </html>
