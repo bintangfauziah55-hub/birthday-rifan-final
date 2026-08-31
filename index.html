@@ -593,108 +593,19 @@ function animate(){
 
 animate();
 
+const musicAudio = new Audio("sal priadi i'd like to watch.mp3");
+const musicButton = document.getElementById("music");
 
-/* MUSIK */
-
-let audio = null;
-let playing = false;
-let timer = null;
-
-const melody = [
-  261.63,
-  329.63,
-  392,
-  329.63,
-  293.66,
-  349.23,
-  440,
-  349.23
-];
-
-function playMelody(){
-
-  if(!playing) return;
-
-  const now = audio.currentTime;
-
-  melody.forEach((frequency,index)=>{
-
-    const oscillator =
-      audio.createOscillator();
-
-    const gain =
-      audio.createGain();
-
-    const start =
-      now + index * .48;
-
-    oscillator.type = "sine";
-    oscillator.frequency.value =
-      frequency;
-
-    gain.gain.setValueAtTime(
-      0,
-      start
-    );
-
-    gain.gain.linearRampToValueAtTime(
-      .05,
-      start+.04
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      .001,
-      start+.38
-    );
-
-    oscillator.connect(gain);
-    gain.connect(audio.destination);
-
-    oscillator.start(start);
-    oscillator.stop(start+.42);
-
-  });
-
-  timer =
-    setTimeout(playMelody,3840);
-
-}
-
-document.getElementById("music").onclick=function(){
-
-  if(!audio){
-
-    audio =
-      new(
-        window.AudioContext ||
-        window.webkitAudioContext
-      )();
-
+musicButton.onclick = function () {
+  if (musicAudio.paused) {
+    musicAudio.play();
+    musicButton.textContent = "♫ Musik: ON";
+  } else {
+    musicAudio.pause();
+    musicButton.textContent = "♫ Musik: OFF";
   }
-
-  if(audio.state === "suspended"){
-    audio.resume();
-  }
-
-  playing = !playing;
-
-  if(playing){
-
-    playMelody();
-
-    this.textContent =
-      "♫ Musik: ON";
-
-  }else{
-
-    clearTimeout(timer);
-
-    this.textContent =
-      "♫ Musik: OFF";
-
-  }
-
 };
+
 
 </script>
 
